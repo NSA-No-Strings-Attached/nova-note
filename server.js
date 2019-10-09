@@ -1,5 +1,5 @@
-const express = require('express');
-const ratelimit = require('express-rate-limit');
+import express from 'express';
+import ratelimit from 'express-rate-limit';
 
 const app = express();
 
