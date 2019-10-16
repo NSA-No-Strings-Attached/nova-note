@@ -25,12 +25,12 @@ userRouter.post('/register', async (req, res) => {
     try {
         let savedUser = await newUser.save();
         res.status(200).send({
-            status: `User added successfully`,
+            message: `User added successfully`,
             user: savedUser
         });
     } catch (err) {
         res.status(500).send({
-            status: `User registration failed`,
+            message: `User registration failed`,
             err: err.message()
         });
     }
@@ -62,7 +62,7 @@ userRouter.post('/login', async (req, res) => {
 /**
  * Shows the Information of Current User
  */
-userRouter.post('/me', async (req, res) => {
+userRouter.get('/me', async (req, res) => {
     let userId = req.body.userId;
     const user = await User.findById(userId);
     res.status(200).send(user);
