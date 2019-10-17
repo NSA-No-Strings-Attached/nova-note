@@ -8,19 +8,20 @@ const noteSchema = new mongoose.Schema({
 		unique : true
 	},
 	content : {
-		type : String
+		type : String,
+		required : true 
 	},
-	comments:[{body : String , date : Date}],
-	
 	dateCreated : {
 		type : Date,
 		default : Date.now
 	},
 	createdBy : {
-		type : mongoose.Schema.Types.ObjectId , ref : 'User',
+		type : Number ,
 		required : true
 	}
 	
 }); 
 
 const Note = model('Note', noteSchema);
+
+export default Note;
