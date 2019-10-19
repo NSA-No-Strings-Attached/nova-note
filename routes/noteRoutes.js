@@ -30,7 +30,7 @@ noteRouter.post('/addNote' ,async(req , res ) => {
        
 });
 
-noteRouter.put('/updateNote' , async(req,res) => {
+noteRouter.post('/updateNote' , async(req,res) => {
     let noteId = req.body.noteId;
     let name = req.body.name;
     let content = req.body.content;
@@ -102,3 +102,9 @@ noteRouter.get('/getNote',async(req,res)=>{
         });
     }
 });
+
+noteRouter.get('/getNotes', async(req, res)=>{
+    let userId = req.body.userId;
+
+    //TO_DO
+})
