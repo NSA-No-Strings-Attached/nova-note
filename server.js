@@ -2,6 +2,7 @@ import express from 'express';
 import ratelimit from 'express-rate-limit';
 import userRouter from './routes/userRoutes';
 import mongoose from 'mongoose';
+import config from 'config';
 
 const app = express();
 
@@ -18,11 +19,11 @@ const rateLimiter = ratelimit({
 app.use(rateLimiter);
 
 // MongoDB connect
-let dbString = `mongodb+srv://aruvishankar17:aruvi@cloudmongodb@shankar-qq9tn.mongodb.net/admin?retryWrites=true&w=majority`;
-mongoose.connect(dbString, { useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true })
-    .then(() => console.log(`Connected to ${db} MongoDB....`))
+let dbString = `mongodb+srv://${config.get('dbUserName')}:${config.get('dbPassword')}@nova-note-lvtcy.gcp.mongodb.net/test?retryWrites=true&w=majority`;
+mongoose.connect(dbString, { useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true, useCreateIndex: true })
+    .then(() => console.log(`Connected to MongoDB....`))
     .catch((err) => {
-        console.log(`Couldn't connect to MongoDB(mLab).... Terminating the application.` + err.message);
+        console.log(`Couldn't connect to MongoDB(mLab).... Terminating the application.` + err);
         process.exit(1);
     });
 
