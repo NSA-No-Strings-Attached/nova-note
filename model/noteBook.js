@@ -1,23 +1,22 @@
-import {Schema ,model} from 'mongoose';
+import {Schema, model} from 'mongoose';
 
 const bookSchema = new mongoose.Schema()({
 
-    title:{
-		type : String,
-		required : true		
+    title: {
+        type: String,
+        required: true
     },
-    dateCreated : {
-		type : Date,
-		default : Date.now
-	},
-	createdBy : {
-		type : Number ,
-		required : true
+    description: {
+        type: String
     },
-    noteIds :{
-        type : [Number] 
+    dateCreated: {
+        type: Date,
+        default: Date.now
+    },
+    createdBy: {
+        type: Number,
+        required: true
     }
-
 });
 
 const NoteBook = model('NoteBook', bookSchema);
