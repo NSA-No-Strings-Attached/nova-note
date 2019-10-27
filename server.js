@@ -1,8 +1,8 @@
-import express from 'express';
-import ratelimit from 'express-rate-limit';
-import userRouter from './routes/userRoutes';
-import mongoose from 'mongoose';
-import config from 'config';
+var express = require('express');
+var ratelimit = require('express-rate-limit');
+var userRouter = require('./routes/userRoutes');
+var mongoose = require('mongoose');
+var config = require('config');
 
 const app = express();
 

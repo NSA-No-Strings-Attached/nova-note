@@ -1,4 +1,4 @@
-import supertest from 'supertest';
+var supertest = require('supertest');
 
 let server;
 let userId;
