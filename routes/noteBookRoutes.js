@@ -1,5 +1,5 @@
-import express from 'express';
-import NoteBook from '../model/noteBook';
+var express = require('express');
+var NoteBook = require('../model/noteBook');
 
 const nbRouter = express.Router;
 

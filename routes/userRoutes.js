@@ -1,7 +1,7 @@
-import express from 'express';
-import bcrypt from 'bcrypt';
-import User from '../model/user';
-import jsonwebtoken from 'jsonwebtoken';
+var express = require('express');
+var bcrypt = require('bcrypt');
+var User = require('../model/user');
+var jsonwebtoken = require('jsonwebtoken');
 
 const userRouter = express.Router();
 

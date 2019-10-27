@@ -1,5 +1,5 @@
-import express from 'express';
-import Note from '../model/note';
+var express = require('express');
+var Note = require('../model/note');
 
 const noteRouter = express.Router;
 
@@ -11,11 +11,17 @@ noteRouter.post('/addNote', async (req, res) => {
     let userId = req.body.userId;
     let nbId = req.body.noteBookId;
 
-    const newNote = new Note({title: name, content: content, createdBy: userId, noteBookId: nbId, dateCreated: Date.now});
+    const newNote = new Note({
+        title: name, 
+        content: content, 
+        createdBy: userId, 
+        noteBookId: nbId, 
+        dateCreated: Date.now
+    });
 
     try {
         let savedNote = await newNote.save();
-        res.status(200).send({message: 'Note Created', note: newNote});
+        res.status(200).send({message: 'Note Created', note: savedNote});
 
     } catch (err) {
         res.status(500).send({message: 'Note not Created !', err: err.message});
