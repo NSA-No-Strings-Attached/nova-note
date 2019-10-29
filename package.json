@@ -4,8 +4,8 @@
   "description": "A minimalistic note taking app like Evernote",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon --exec babel-node server.js",
-    "test": ""
+    "start": "nodemon server.js",
+    "test": "jest --verbose --maxWorkers=1 --forceExit --coverage"
   },
   "repository": {
     "type": "git",
