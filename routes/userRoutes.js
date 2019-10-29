@@ -31,7 +31,7 @@ userRouter.post('/register', async (req, res) => {
     } catch (err) {
         res.status(500).send({
             message: `User registration failed`,
-            err: err.message()
+            err: err.message
         });
     }
 });
@@ -68,7 +68,19 @@ userRouter.get('/me', async (req, res) => {
     res.status(200).send(user);
 });
 
-export default userRouter;
+/**
+ * Deletes an User for a given Id
+ */
+userRouter.delete('/delete', async (req, res) => {
+    let userId = req.body.userId;
+    await User.findByIdAndDelete(userId);
+    res.status(200)
+        .send({
+            message: 'User deleted successfully'
+        });
+});
+
+module.exports = userRouter;
 
 
 
