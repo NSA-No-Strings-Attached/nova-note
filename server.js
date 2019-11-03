@@ -1,6 +1,8 @@
 var express = require('express');
 var ratelimit = require('express-rate-limit');
 var userRouter = require('./routes/userRoutes');
+var noteRouter = require('./routes/noteRoutes')
+var noteBookRouter = require('./routes/noteBookRoutes')
 var mongoose = require('mongoose');
 var config = require('config');
 
@@ -30,6 +32,12 @@ mongoose.connect(dbString, { useNewUrlParser: true, useFindAndModify: false, use
 
 // User Routes
 app.use('/api/user', userRouter);
+
+// Note Routes
+app.use('/api/note', noteRouter);
+
+// NoteBook Routes
+app.use('/api/noteBook', noteBookRouter);
 
 // Starting server
 const server = app.listen(port, () => {

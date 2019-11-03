@@ -12,7 +12,7 @@ noteRouter.post('/addNote', async (req, res) => {
     let nbId = req.body.noteBookId;
 
     const newNote = new Note({
-        title: name, 
+        name: name, 
         content: content, 
         createdBy: userId, 
         noteBookId: nbId, 
@@ -43,7 +43,7 @@ noteRouter.post('/updateNote', async (req, res) => {
             createdBy: userId
         }, {
             $set: {
-                title: name,
+                name: name,
                 content: content
             }
         }, {
@@ -52,7 +52,7 @@ noteRouter.post('/updateNote', async (req, res) => {
             if (err) {
                 throw(err);
             }
-            res.status(200).send({message: 'Note Created', note: savedNote});
+            res.status(200).send({message: 'Note Updated', note: savedNote});
         });
     } catch (err) {
         res.status(500).send({message: 'Note not updated !', err: err.message});

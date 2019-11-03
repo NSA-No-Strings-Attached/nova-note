@@ -11,7 +11,12 @@ nbRouter.post('/addNoteBook', async (req, res) => {
     let userId = req.body.userId;
 
     try {
-        const noteBook = new NoteBook({title: name, description: description, createdBy: userId, dateCreated: Date.now});
+        const noteBook = new NoteBook({
+            name: name, 
+            description: description, 
+            createdBy: userId, 
+            dateCreated: Date.now
+        });
         let newBook = await noteBook.save();
         res.status(200).send({message: 'NoteBook Created', book: newBook});
     } catch (err) {
@@ -44,7 +49,7 @@ nbRouter.post('/updateNoteBook', async (req, res) => {
             if (err) {
                 throw err;
             }
-            res.status(200).send({message: 'NoteBook updated', book: noteBook});
+            res.status(200).send({message: 'NoteBook Updated', book: noteBook});
         });
     } catch (err) {
         res.status(500).send({message: 'NoteBook not Updated !', err: err.message});
@@ -97,7 +102,7 @@ nbRouter.get('/getNoteBook', async (req, res) => {
 
 // Get All NoteBook
 
-nbRouter.get('/getAllNoteBooks', async (req, res) => {
+nbRouter.get('/getNoteBooks', async (req, res) => {
     let userId = req.body.userId;
 
     try {
@@ -112,4 +117,4 @@ nbRouter.get('/getAllNoteBooks', async (req, res) => {
     } catch (err) {
         res.status(500).send({message: 'cannot get noteBooks !', err: err.message});
     }
-})
+});
