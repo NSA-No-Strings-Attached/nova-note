@@ -1,2 +1,5 @@
 # Node Dependencies
 node_modules/
+
+# Test coverage
+coverage/
