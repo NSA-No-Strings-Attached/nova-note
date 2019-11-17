@@ -1,28 +1,14 @@
 var supertest = require('supertest');
 
 let server;
-let userId;
-let nbId;
+let userId = "123_user";
+let nbId = "123_nb";
 let nId;
 
 describe('User Rest APIs', () => {
     
     before(() => {
         server = require('../server');
-        const res = await supertest(server).post('/api/user/register').send({ 
-            name: 'User Name',
-            email: 'userName@email.com',
-            password: 'userPassword123'
-        }
-    );
-    userId = res.user._id;
-        const nbResponse = await supertest(server).post('api/noteBook/addNoteBook').send({
-            name: 'noteBook',
-            description: 'description', 
-            createdBy: userId
-        }
-    );
-    nbId = nbResponse.book._id;
     });
 
     after(() => {

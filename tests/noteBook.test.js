@@ -1,29 +1,22 @@
 var supertest = require('supertest');
 
 let server;
-let userId;
+let userId = "123_user";;
 let nbId;
 
 describe('User Rest APIs', () => {
-    
+
     before(() => {
         server = require('../server');
-        const res = await supertest(server).post('/api/user/register').send({ 
-            name: 'User Name',
-            email: 'userName@email.com',
-            password: 'userPassword123'
-        }
-    );
-    userId = res.user._id;
     });
 
     after(() => {
         server.close();
     });
 
-    //Add NoteBook test
+    // Add NoteBook test
 
-    it('Adds a new NoteBook', async () =>{
+    it('Adds a new NoteBook', async () => {
         const res = await supertest(server).post('api/noteBook/addNoteBook').send({
             name = 'name',
             description = 'a NoteBook',
@@ -36,9 +29,9 @@ describe('User Rest APIs', () => {
         expect(res.body.message).toBe('NoteBook Created');
     });
 
-    //Updates a NoteBook
+    // Updates a NoteBook
 
-    it('Updates a NoteBook', async () =>{
+    it('Updates a NoteBook', async () => {
         const res = await supertest(server).post('api/noteBook/updateNoteBook').send({
             noteBookId = nbId,
             name = 'updatedName',
@@ -52,7 +45,7 @@ describe('User Rest APIs', () => {
         expect(res.body.message).toBe('NoteBook Updated');
     });
 
-    it('Gets a NoteBook', async () =>{
+    it('Gets a NoteBook', async () => {
         const res = await supertest(server).post('api/noteBook/getNoteBook').send({
             noteBookId = nbId,
             userId = userId
@@ -63,7 +56,7 @@ describe('User Rest APIs', () => {
         expect(res.body.book._id).toBe(nbId);
     });
 
-    it('Gets all Notes', async () =>{
+    it('Gets all Notes', async () => {
         const res = await supertest(server).post('api/noteBook/getNoteBooks').send({
             userId = userId
         });
@@ -72,7 +65,7 @@ describe('User Rest APIs', () => {
         expect(res.body.message).toBe('success');
     });
 
-    it('Deletes a NoteBook', async () =>{
+    it('Deletes a NoteBook', async () => {
         const res = await supertest(server).post('api/noteBook/deleteNoteBook').send({
             noteBookId = nbId,
             userId = userId

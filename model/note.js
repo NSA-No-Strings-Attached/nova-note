@@ -14,11 +14,11 @@ const noteSchema = new mongoose.Schema({
         default: Date.now
     },
     createdBy: {
-        type: Number,
+        type: String,
         required: true
     },
     noteBookId: {
-        type: Number,
+        type: String,
         required: true
     }
 

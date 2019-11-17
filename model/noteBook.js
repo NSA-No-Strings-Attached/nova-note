@@ -14,7 +14,7 @@ const bookSchema = new mongoose.Schema()({
         default: Date.now
     },
     createdBy: {
-        type: Number,
+        type: String,
         required: true
     }
 });
