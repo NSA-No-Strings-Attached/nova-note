@@ -1,8 +1,8 @@
 var express = require('express');
 var ratelimit = require('express-rate-limit');
 var userRouter = require('./routes/userRoutes');
-var noteRouter = require('./routes/noteRoutes')
-var noteBookRouter = require('./routes/noteBookRoutes')
+var noteRouter = require('./routes/noteRoutes');
+var noteBookRouter = require('./routes/noteBookRoutes');
 var mongoose = require('mongoose');
 var config = require('config');
 

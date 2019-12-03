@@ -1,7 +1,7 @@
 var express = require('express');
 var Note = require('../model/note');
 
-const noteRouter = express.Router;
+const noteRouter = express.Router();
 
 // Add Note
 
@@ -123,3 +123,5 @@ noteRouter.get('/getNotes', async (req, res) => {
         res.status(500).send({message: 'Cannot get Notes !', err: err.message});
     }
 });
+
+module.exports = noteRouter;

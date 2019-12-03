@@ -1,7 +1,7 @@
 var express = require('express');
 var NoteBook = require('../model/noteBook');
 
-const nbRouter = express.Router;
+const nbRouter = express.Router();
 
 // Add NoteBook
 
@@ -118,3 +118,5 @@ nbRouter.get('/getNoteBooks', async (req, res) => {
         res.status(500).send({message: 'cannot get noteBooks !', err: err.message});
     }
 });
+
+module.exports = nbRouter;
