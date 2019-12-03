@@ -7,11 +7,11 @@ let nId;
 
 describe('User Rest APIs', () => {
     
-    before(() => {
+    beforeEach(() => {
         server = require('../server');
     });
 
-    after(() => {
+    afterEach(() => {
         server.close();
     });
 
