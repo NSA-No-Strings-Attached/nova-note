@@ -35,10 +35,10 @@ describe('User Rest APIs', () => {
 
     it('Updates a Note', async () =>{
         const res = await supertest(server).post('api/note/updateNote').send({
-            noteId = nId,
-            name = 'updatedName',
-            content = 'req.body.content',
-            userId = userId
+            noteId : nId,
+            name : 'updatedName',
+            content : 'req.body.content',
+            userId : userId
         });
 
         expect(res.status).toBe(200);
@@ -51,7 +51,7 @@ describe('User Rest APIs', () => {
 
     it('Gets a Note', async () =>{
         const res = await supertest(server).post('api/note/getNote').send({
-            noteId = nId
+            noteId : nId
         });
 
         expect(res.status).toBe(200);
@@ -61,8 +61,8 @@ describe('User Rest APIs', () => {
 
     it('Gets all Notes', async () =>{
         const res = await supertest(server).post('api/note/getNotes').send({
-            noteBookId = nbId,
-            userId = userId
+            noteBookId : nbId,
+            userId : userId
         });
 
         expect(res.status).toBe(200);
@@ -71,8 +71,8 @@ describe('User Rest APIs', () => {
 
     it('Deletes a Note', async () =>{
         const res = await supertest(server).post('api/note/deleteNote').send({
-            noteId = nId,
-            userId = userId
+            noteId : nId,
+            userId : userId
         });
 
         expect(res.status).toBe(200);

@@ -18,9 +18,9 @@ describe('User Rest APIs', () => {
 
     it('Adds a new NoteBook', async () => {
         const res = await supertest(server).post('api/noteBook/addNoteBook').send({
-            name = 'name',
-            description = 'a NoteBook',
-            userId = userId
+            name : 'name',
+            description : 'a NoteBook',
+            userId : userId
         });
 
         nbId = res.body.book._id;
@@ -33,10 +33,10 @@ describe('User Rest APIs', () => {
 
     it('Updates a NoteBook', async () => {
         const res = await supertest(server).post('api/noteBook/updateNoteBook').send({
-            noteBookId = nbId,
-            name = 'updatedName',
-            description = 'req.body.content',
-            userId = userId
+            noteBookId : nbId,
+            name : 'updatedName',
+            description : 'req.body.content',
+            userId : userId
         });
 
         expect(res.status).toBe(200);
@@ -47,8 +47,8 @@ describe('User Rest APIs', () => {
 
     it('Gets a NoteBook', async () => {
         const res = await supertest(server).post('api/noteBook/getNoteBook').send({
-            noteBookId = nbId,
-            userId = userId
+            noteBookId : nbId,
+            userId : userId
         });
 
         expect(res.status).toBe(200);
@@ -58,7 +58,7 @@ describe('User Rest APIs', () => {
 
     it('Gets all Notes', async () => {
         const res = await supertest(server).post('api/noteBook/getNoteBooks').send({
-            userId = userId
+            userId : userId
         });
 
         expect(res.status).toBe(200);
@@ -67,8 +67,8 @@ describe('User Rest APIs', () => {
 
     it('Deletes a NoteBook', async () => {
         const res = await supertest(server).post('api/noteBook/deleteNoteBook').send({
-            noteBookId = nbId,
-            userId = userId
+            noteBookId : nbId,
+            userId : userId
         });
 
         expect(res.status).toBe(200);
