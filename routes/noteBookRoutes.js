@@ -106,8 +106,8 @@ nbRouter.get('/getNoteBooks', async (req, res) => {
             if (err) {
                 throw err;
             }
-            res.status(200).send({message: 'success', books: noteBooks});
-        })
+        });
+        res.status(200).send({message: 'success', books: noteBooks});
     } catch (err) {
         res.status(500).send({message: 'cannot get noteBooks !', err: err.message});
     }

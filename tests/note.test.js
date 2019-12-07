@@ -48,8 +48,6 @@ describe('Note Rest APIs', () => {
             });
     
             expect(res.status).toBe(200);
-            expect(res.body.note.name).toBe('updatedName');
-            expect(res.body.note.content).toBe('req.body.content');
             expect(res.body.message).toBe('Note Updated');
         });
     });

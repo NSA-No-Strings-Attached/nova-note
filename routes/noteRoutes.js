@@ -34,9 +34,8 @@ noteRouter.post('/updateNote', async (req, res) => {
     let content = req.body.content;
     let userId = req.body.userId;
 
-    let savedNode;
     try {
-        savedNote = await Note.findOneAndUpdate({
+        await Note.findOneAndUpdate({
             _id: noteId,
             createdBy: userId
         }, {
@@ -50,7 +49,7 @@ noteRouter.post('/updateNote', async (req, res) => {
             if (err) {
                 throw(err);
             }
-            res.status(200).send({message: 'Note Updated', note: savedNote});
+            res.status(200).send({message: 'Note Updated'});
         });
     } catch (err) {
         res.status(500).send({message: 'Note not updated !', err: err.message});

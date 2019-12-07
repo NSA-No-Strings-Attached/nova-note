@@ -54,7 +54,7 @@ describe('Note Book Rest APIs', () => {
         expect(res.body.book._id).toBe(nbId);
     });
 
-    it('Gets all Notes', async () => {
+    it('Gets all NotesBooks', async () => {
         const res = await supertest(server).get('/api/noteBook/getNoteBooks').send({
             userId : userId
         });
