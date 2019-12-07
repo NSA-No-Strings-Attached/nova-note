@@ -13,14 +13,13 @@ nbRouter.post('/addNoteBook', async (req, res) => {
     try {
         const noteBook = new NoteBook({
             name: name, 
-            description: description, 
+            description: description,
             createdBy: userId, 
-            dateCreated: Date.now
         });
         let newBook = await noteBook.save();
         res.status(200).send({message: 'NoteBook Created', book: newBook});
     } catch (err) {
-        res.status(500).send({message: 'NoteBook not Created !', err: err.message});
+        res.status(500).send({message: 'NoteBook not Created', err: err.message});
     }
 });
 
@@ -38,19 +37,13 @@ nbRouter.post('/updateNoteBook', async (req, res) => {
     };
 
     try {
-        const noteBook = await NoteBook.findOneAndUpdate(query, {
+        await NoteBook.findByIdAndUpdate(query, {
             $set: {
                 name: name,
                 description: description
             }
-        }, {
-            new: true
-        }, function (err) {
-            if (err) {
-                throw err;
-            }
-            res.status(200).send({message: 'NoteBook Updated', book: noteBook});
         });
+        res.status(200).send({message: 'NoteBook Updated'});
     } catch (err) {
         res.status(500).send({message: 'NoteBook not Updated !', err: err.message});
     }
@@ -63,7 +56,7 @@ nbRouter.delete('/deleteNoteBook', async (req, res) => {
     let userId = req.body.userId;
 
     try {
-        await NoteBook.remove({
+        await NoteBook.deleteOne({
             _id: nbId,
             userId: userId
         }, function (err) {
@@ -88,13 +81,14 @@ nbRouter.get('/getNoteBook', async (req, res) => {
         createdBy: userId
     }
 
+    let noteBook;
     try {
-        const noteBook = await NoteBook.findOne(query, function (err) {
+        noteBook = await NoteBook.findOne(query, function (err) {
             if (err) {
                 throw err;
             }
-            res.status(200).send({message: 'success', book: noteBook});
-        })
+        });
+        res.status(200).send({message: 'success', book: noteBook});
     } catch (err) {
         res.status(500).send({message: 'cannot get noteBook !', err: err.message});
     }

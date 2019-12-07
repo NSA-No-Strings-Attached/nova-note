@@ -4,7 +4,7 @@ let server;
 let userId = "123_user";;
 let nbId;
 
-describe('User Rest APIs', () => {
+describe('Note Book Rest APIs', () => {
 
     beforeEach(() => {
         server = require('../server');
@@ -17,7 +17,7 @@ describe('User Rest APIs', () => {
     // Add NoteBook test
 
     it('Adds a new NoteBook', async () => {
-        const res = await supertest(server).post('api/noteBook/addNoteBook').send({
+        const res = await supertest(server).post('/api/noteBook/addNoteBook').send({
             name : 'name',
             description : 'a NoteBook',
             userId : userId
@@ -32,7 +32,7 @@ describe('User Rest APIs', () => {
     // Updates a NoteBook
 
     it('Updates a NoteBook', async () => {
-        const res = await supertest(server).post('api/noteBook/updateNoteBook').send({
+        const res = await supertest(server).post('/api/noteBook/updateNoteBook').send({
             noteBookId : nbId,
             name : 'updatedName',
             description : 'req.body.content',
@@ -40,13 +40,11 @@ describe('User Rest APIs', () => {
         });
 
         expect(res.status).toBe(200);
-        expect(res.body.note.name).toBe('updatedName');
-        expect(res.body.note.description).toBe('req.body.content');
         expect(res.body.message).toBe('NoteBook Updated');
     });
 
     it('Gets a NoteBook', async () => {
-        const res = await supertest(server).post('api/noteBook/getNoteBook').send({
+        const res = await supertest(server).get('/api/noteBook/getNoteBook').send({
             noteBookId : nbId,
             userId : userId
         });
@@ -57,7 +55,7 @@ describe('User Rest APIs', () => {
     });
 
     it('Gets all Notes', async () => {
-        const res = await supertest(server).post('api/noteBook/getNoteBooks').send({
+        const res = await supertest(server).get('/api/noteBook/getNoteBooks').send({
             userId : userId
         });
 
@@ -66,13 +64,13 @@ describe('User Rest APIs', () => {
     });
 
     it('Deletes a NoteBook', async () => {
-        const res = await supertest(server).post('api/noteBook/deleteNoteBook').send({
+        const res = await supertest(server).delete('/api/noteBook/deleteNoteBook').send({
             noteBookId : nbId,
             userId : userId
         });
 
         expect(res.status).toBe(200);
-        expect(res.body.message).toBe('Note deleted');
+        expect(res.body.message).toBe('NoteBook deleted');
     });
 
 });

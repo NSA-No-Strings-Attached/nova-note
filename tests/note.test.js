@@ -5,7 +5,7 @@ let userId = "123_user";
 let nbId = "123_nb";
 let nId;
 
-describe('User Rest APIs', () => {
+describe('Note Rest APIs', () => {
     
     beforeEach(() => {
         server = require('../server');
@@ -15,68 +15,72 @@ describe('User Rest APIs', () => {
         server.close();
     });
 
-    //Add Note Test
+    describe('POST requests', () => {
 
-    it('Adds a new Note', async () =>{
-        const res = await supertest(server).post('api/note/addNote').send({
-            name: 'note',
-            content: 'content', 
-            createdBy: userId, 
-            noteBookId: nbId
+        /**
+        * Test for adding a note
+        */
+        it('Adds a new Note', async () => {
+            const res = await supertest(server)
+                            .post('/api/note/addNote')
+                            .send({
+                                name: 'note',
+                                content: 'content', 
+                                userId: userId,
+                                noteBookId: nbId
+                            });
+
+            nId = res.body.note._id;
+
+            expect(res.status).toBe(200);
+            expect(res.body.message).toBe('Note Created');
         });
 
-        nId = res.body.note._id;
-
-        expect(res.status).toBe(200);
-        expect(res.body.message).toBe('Note Created');
-    });
-
-    //Update Note Test
-
-    it('Updates a Note', async () =>{
-        const res = await supertest(server).post('api/note/updateNote').send({
-            noteId : nId,
-            name : 'updatedName',
-            content : 'req.body.content',
-            userId : userId
+        /**
+         * Test for updating an existing note
+         */
+        it('Updates a Note', async () => {
+            const res = await supertest(server).post('/api/note/updateNote').send({
+                noteId : nId,
+                name : 'updatedName',
+                content : 'req.body.content',
+                userId : userId
+            });
+    
+            expect(res.status).toBe(200);
+            expect(res.body.note.name).toBe('updatedName');
+            expect(res.body.note.content).toBe('req.body.content');
+            expect(res.body.message).toBe('Note Updated');
         });
-
-        expect(res.status).toBe(200);
-        expect(res.body.note.name).toBe('updatedName');
-        expect(res.body.note.content).toBe('req.body.content');
-        expect(res.body.message).toBe('Note Updated');
     });
 
-    //Get Note Test
+    describe('GET requests', () => {
 
-    it('Gets a Note', async () =>{
-        const res = await supertest(server).post('api/note/getNote').send({
-            noteId : nId
+        /**
+         * Test for getting a Note by Id
+         */
+        it('Gets a Note', async () => {
+            const res = await supertest(server).get('/api/note/getNote').send({
+                noteId : nId
+            });
+
+            expect(res.status).toBe(200);
+            expect(res.body.note._id).toBe(nId);
         });
-
-        expect(res.status).toBe(200);
-        expect(res.body.message).toBe('success');
-        expect(res.body.note._id).toBe(nId);
     });
 
-    it('Gets all Notes', async () =>{
-        const res = await supertest(server).post('api/note/getNotes').send({
-            noteBookId : nbId,
-            userId : userId
+    describe('Delete requests', () => {
+        /**
+         * Test for deleting a Note using note Id and user Id
+         */
+        it('Deletes a Note', async () => {
+            const res = await supertest(server).delete('/api/note/deleteNote').send({
+                noteId : nId,
+                userId : userId
+            });
+
+            expect(res.status).toBe(200);
+            expect(res.body.message).toBe('Note deleted');
         });
-
-        expect(res.status).toBe(200);
-        expect(res.body.message).toBe('success');
     });
-
-    it('Deletes a Note', async () =>{
-        const res = await supertest(server).post('api/note/deleteNote').send({
-            noteId : nId,
-            userId : userId
-        });
-
-        expect(res.status).toBe(200);
-        expect(res.body.message).toBe('Note deleted');
-    });
-
 });

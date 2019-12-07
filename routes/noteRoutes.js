@@ -15,18 +15,15 @@ noteRouter.post('/addNote', async (req, res) => {
         name: name, 
         content: content, 
         createdBy: userId, 
-        noteBookId: nbId, 
-        dateCreated: Date.now
+        noteBookId: nbId 
     });
 
     try {
         let savedNote = await newNote.save();
         res.status(200).send({message: 'Note Created', note: savedNote});
-
     } catch (err) {
         res.status(500).send({message: 'Note not Created !', err: err.message});
     }
-
 });
 
 // Update Note
@@ -66,7 +63,7 @@ noteRouter.delete('/deleteNote', async (req, res) => {
     let userId = req.body.userId;
 
     try {
-        await Note.remove({
+        await Note.deleteOne({
             _id: noteId,
             createdBy: userId
         }, function (err) {
@@ -86,41 +83,18 @@ noteRouter.get('/getNote', async (req, res) => {
     let noteId = req.body.noteId;
 
     try {
-
-        const reqNote = await Note.findOne({
-            _id: noteId
-        }, function (err) {
-            if (err) {
-                throw err;
-            }
-            res.status(200).send({message: 'success', note: reqNote});
-        })
-
+        let note = await Note.findById(noteId);
+        if (note) {
+            res.status(200).send({
+                note: note
+            });
+        } else {
+            res.status(400).send({
+                message: 'Note not found'
+            });
+        }
     } catch (err) {
-        res.status(500).send({message: 'Cannot get Note !', err: err.message});
-    }
-});
-
-// Get All Notes
-
-noteRouter.get('/getNotes', async (req, res) => {
-    let userId = req.body.userId;
-    let nbId = req.body.noteBookId;
-
-    var query = {
-        createdBy: userId,
-        noteBookId: nbId
-    };
-
-    try {
-        const reqNotes = await Note.find(query, function (err) {
-            if (err) {
-                throw err;
-            }
-            res.status(200).send({message: 'success', notes: reqNotes});
-        })
-    } catch (err) {
-        res.status(500).send({message: 'Cannot get Notes !', err: err.message});
+        res.status(500).send({message: 'Cannot get Note', err: err.message});
     }
 });
 
