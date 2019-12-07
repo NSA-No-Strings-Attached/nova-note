@@ -34,8 +34,9 @@ noteRouter.post('/updateNote', async (req, res) => {
     let content = req.body.content;
     let userId = req.body.userId;
 
+    let savedNode;
     try {
-        let savedNote = await Note.findOneAndUpdate({
+        savedNote = await Note.findOneAndUpdate({
             _id: noteId,
             createdBy: userId
         }, {
